@@ -16,10 +16,10 @@ export class Auth {
 
     this.supabase.auth.onAuthStateChange((event, session) => {
       if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
-        this.user.next(session!.user)
-        this.router.navigate(['/dashboard'])
+        this.user.next(session!.user);
+        this.router.navigate(['/dashboard']);
       } else {
-        this.user.next(null)
+        this.user.next(null);
       }
     });
   }
