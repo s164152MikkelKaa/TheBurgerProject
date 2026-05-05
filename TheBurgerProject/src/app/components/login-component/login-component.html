@@ -1,18 +1,27 @@
 <div class="login-wrapper">
   <h2>Login</h2>
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <label for="email">Email</label>
-    <input type="email" id="email" formControlName="email" class="login-input login-email" />
-    <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="error-message">
-      <div *ngIf="loginForm.get('email')?.errors?.['required']">Email is required</div>
-      <div *ngIf="loginForm.get('email')?.errors?.['email']">The given Email is invalid</div>
+  <form [formGroup]="theForm" (ngSubmit)="atemptLogIn()">
+    <div class="form-input">
+      <label for="email">Email</label><br />
+      <input type="email" id="email" placeholder="name@company.com" formControlName="email" class="login-input login-email" />
+      <br *ngIf="theForm.get('email')?.invalid && theForm.get('email')?.touched" />
+      <div *ngIf="theForm.get('email')?.invalid && theForm.get('email')?.touched" class="error-message">
+        <div *ngIf="theForm.get('email')?.errors?.['required']">An Email is required.</div>
+        <div *ngIf="theForm.get('email')?.errors?.['email']">The given Email is invalid.</div>
+      </div>
     </div>
-    <label for="password">Password</label>
-    <input type="password" id="password" formControlName="password" class="login-input login-password" />
-    <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="error-message">
-      <div *ngIf="loginForm.get('password')?.errors?.['required']">Adgangskode er påkrævet</div>
+    <div class="form-input">
+      <label for="password">Password</label><br />
+      <input type="password" id="password" placeholder="••••••••" formControlName="password" class="login-input login-password" />
+      <br *ngIf="theForm.get('password')?.invalid && theForm.get('password')?.touched" />
+      <div *ngIf="theForm.get('password')?.invalid && theForm.get('password')?.touched" class="error-message">
+        <div *ngIf="theForm.get('password')?.errors?.['required']">A password is required.</div>
+      </div>
     </div>
-    <button type="submit" [disabled]="loginForm.invalid || loading">{{ loading ? 'Loging in...' : 'Login' }}</button>
+    <button type="submit" [disabled]="theForm.invalid || loading">{{ loading ? 'Loging in...' : 'Login' }}</button>
   </form>
-  <a routerLink="/signup">Create new account?</a>
+  <div *ngIf="loginFail" class="error-message">Login failed, tjek Email and Password or internetconnection, then try again.</div>
+  <div class="signup-link">
+    <a routerLink="/signup">Create new account?</a>
+  </div>
 </div>

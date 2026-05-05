@@ -6,6 +6,7 @@ import { App } from './app';
 import { LoginComponent } from './components/login-component/login-component';
 import { SignupComponent } from './components/signup-component/signup-component';
 import { DashboardComponent } from './components/dashboard-component/dashboard-component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { DashboardComponent } from './components/dashboard-component/dashboard-c
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [
     provideBrowserGlobalErrorListeners()

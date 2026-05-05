@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Auth } from '../../services/auth';
 
 @Component({
   selector: 'app-signup-component',
@@ -8,5 +7,5 @@ import { Auth } from '../../services/auth';
   styleUrl: './signup-component.css',
 })
 export class SignupComponent {
-  constructor(private theAuth: Auth) { }
+  
 }

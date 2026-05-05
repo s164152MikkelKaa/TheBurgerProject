@@ -1,6 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { Auth } from './services/auth';
+import { AuthService } from './services/DataAccess/auth-service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -11,10 +12,11 @@ import { Auth } from './services/auth';
 export class App {
   protected readonly title = signal('TheBurgerProject');
 
-  constructor(private theAuth: Auth, private router: Router) { }
+  protected router = inject(Router);
+  private _authService = inject(AuthService);
 
-  signOut() {
-    this.theAuth.theSignOut();
-    this.router.navigate(['/login']);
+  async signOut() {
+    await this._authService.signOut();
+    this.router.navigateByUrl('/');
   }
 }

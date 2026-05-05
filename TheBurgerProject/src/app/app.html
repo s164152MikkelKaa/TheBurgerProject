@@ -1,5 +1,5 @@
 <nav>
-  <button (click)="signOut()" type="button">Logout</button>
+  <button *ngIf="router.url !== '/' && router.url !== '/signup'" (click)="signOut()" type="button">Logout</button>
 </nav>
 <main>
   <router-outlet />
