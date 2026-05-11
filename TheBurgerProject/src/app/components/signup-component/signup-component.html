@@ -1,6 +1,29 @@
 <div class="signup-wrapper">
   <h2>Signup</h2>
-  <form>
-
+  <form [formGroup]="theFormNew" (ngSubmit)="doSignup()">
+    <div class="form-input">
+      <label for="email">Email</label><br />
+      <input type="email" id="email" placeholder="name@company.com" formControlName="email" class="signup-input" />
+      <br *ngIf="theFormNew.get('email')?.invalid && theFormNew.get('email')?.touched" />
+      <div *ngIf="theFormNew.get('email')?.invalid && theFormNew.get('email')?.touched" class="error-message">
+        <div *ngIf="theFormNew.get('email')?.errors?.['required']">An Email is required.</div>
+        <div *ngIf="theFormNew.get('email')?.errors?.['email']">The given Email is invalid.</div>
+      </div>
+    </div>
+    <div class="form-input">
+      <label for="password">Password</label><br />
+      <input type="password" id="password" placeholder="••••••••" formControlName="password" class="signup-input" />
+      <br *ngIf="theFormNew.get('password')?.invalid && theFormNew.get('password')?.touched" />
+      <div *ngIf="theFormNew.get('password')?.invalid && theFormNew.get('password')?.touched" class="error-message">
+        <div *ngIf="theFormNew.get('password')?.errors?.['required']">A password is required.</div>
+        <div *ngIf="theFormNew.get('password')?.errors?.['minlength'] || theFormNew.get('password')?.errors?.['maxlength']">A password length must be more than 4 and less than 36 characters.</div>
+        <div *ngIf="theFormNew.get('password')?.errors?.['pattern']">The password must contain atleast: a capital letter, a non-capital letter and a number.</div>
+      </div>
+    </div>
+    <button type="submit" [disabled]="theFormNew.invalid || loading">{{ loading ? 'Creating account...' : 'Signup' }}</button>
   </form>
+  <div *ngIf="signupFail" class="error-message">Signup failed, tjek Email and Password or internetconnection, then try again.</div>
+  <div class="login-link">
+    <a routerLink="/login">Already have an account?</a>
+  </div>
 </div>
